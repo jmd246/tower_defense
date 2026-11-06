@@ -1,7 +1,10 @@
 import pygame
 from tower_defense.systems.grid import Grid
 from tower_defense.systems.map_data import MapData
+
 fps = 60
+# cmmand line ars for starting in editor or game mode
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800,600))
@@ -17,8 +20,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-            if event.type == pygame.MOUSEBUTTONDOWN: 
-                tile = grid.get_tile(event.pos[1] // grid.tile_size, event.pos[0] // grid.tile_size)       
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos[1]//grid.tile_size, event.pos[0]//grid.tile_size 
+                tile = grid.get_tile(x, y)       
                 if tile is not None:
                     row, col = tile
                     map_data.set_tile(row, col, 1)
